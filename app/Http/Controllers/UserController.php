@@ -1,9 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
-
+use App\Models\User;
 class UserController extends Controller
 {
     /**
@@ -13,7 +12,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        echo "me pican los cocos";
+        $users = User::select('id', 'name')->get();
+        return view('users.index',compact('users'));
     }
 
     /**
@@ -34,9 +34,8 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        echo $request->name;
-
-        echo "<br>" . $request->email;
+        $user = User::create($request->all());
+        return $user;
     }
 
     /**
@@ -47,7 +46,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        echo $id;
+        $user = User::find($id);
+        return view('users.update',compact('user'));
     }
 
     /**
