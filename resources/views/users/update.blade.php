@@ -10,7 +10,12 @@
     <body>
         <h1>edit</h1>
 
-        <form method="post" action="http://127.0.0.1:8000/users/">
+        <form method="post" action="{{ url('/users')}}">
+            @csrf
+            @method('PUT')
+
+            <input type="hidden" value="{{$user ->name}}" name="name">
+
             <label>
                 nombre
             </label>
